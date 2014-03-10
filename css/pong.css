@@ -1,0 +1,7 @@
+body {background-color:#333; color: white;}
+button {background-color:lightgrey;}
+label {display: block;}
+#myCanvas { border: 5px solid green; background-color: black; color: white; }
+#canvas-holder { margin: auto; text-align: center; }
+#button-holder { margin: auto; text-align: center; }
+#new-game {margin-bottom: 3em;}

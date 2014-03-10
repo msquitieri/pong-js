@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Pong!</title>
+<script type="text/javascript" src="./js/jquery-latest.js"></script>
+<script type="text/javascript" src="./js/pong.js"></script>
+<link rel='stylesheet' type='text/css' href="./css/pong.css"/>
+</head>
+<body>
+<div id='canvas-holder'>
+<canvas id='myCanvas' width='500' height='500'>Your browser does not support the canvas element!</canvas>
+</div>
+<div id='button-holder'>
+<button id='new-game'>NEW GAME</button>
+<button id='pause'>PAUSE</button>
+<label>Difficulty:</label>
+<select id='difficulty'>
+	<option>Beginner</option>
+	<option>Intermediate</option>
+	<option>Impossible</option>
+</select>
+<audio id='blip' src='./sounds/blip.mp3' type='audio/mp3' preload='auto'></audio>
+<audio id='score' src='./sounds/score.mp3' type='audio/mp3' preload='auto'></audio>
+<audio id='game-over' src='./sounds/game-over.mp3' type='audio/mp3' preload='auto'></audio>
+</div>
+</body>
+</html>
