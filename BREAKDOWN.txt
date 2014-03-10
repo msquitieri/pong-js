@@ -1,0 +1,83 @@
+Michael Squitieri -- Professor Sklar -- CISC 3660 Game Programming
+
+Assignment #1 Pong
+
+This version of Pong is made possible through these game objects:
+
+	userPaddle - This represents the behavior of the user paddle and keeps track of...
+		- its position on the xy axis
+		- its height
+		- its length
+		- the user's score
+		- whether or not the user just scored a point, to be used to properly serve the ball.
+	and contains the behavior to...
+		- move the user paddle based on the user's input.
+
+	enemyPaddle - This represents the behavior of the enemy paddle and keeps track of...
+		- its position on the xy axis
+		- its height
+		- its length
+		- the enemy's score
+		- whether or not the enemy just scored a point, to be used to properly serve the ball.
+	and contains the behavior to...
+		- move intelligently (but not perfectly!) to where the ball is located.
+
+	ball - This represents the behavior of the ball that is bounced back and forth and keeps track of...
+		- its position on the xy axis
+		- the length of its radius
+		- the direction vector of its x component
+		- the direction vector of its y component
+	and contains the behavior to...
+		- check to see if the ball has gone out of bounds on the y-direction.
+		- check to see if the ball has been hit by a paddle.
+		- check to see if the ball has been hit by the user's paddle.
+		- check to see if the ball is in a position where someone has scored.
+		- move the ball, which is based on its direction vectors dy and dx.
+		- serve the ball after someone has scored or if a new game has begun.
+	
+	difficulty - This represents the difficulty the user has selected and it keeps track of...
+		- the name of the difficulty (Beginner, Intermediate or Impossible)
+		- if the number of pixels the enemyPaddle should travel if it is close to the ball.
+		- if the number of pixels the enemyPaddle should travel if it is near to the ball.
+		- if the number of pixels the enemyPaddle should travel if it is far away from the ball.
+	and doesn't contain any behavior.
+
+	Note: The Impossible difficulty actually is impossible; you will never be able to score a point under that difficulty.
+
+	Animation
+		The animation is all done in the function paint(), which just paints the objects to the canvas using their
+		xy coordinates. The real magic happens in the function move() in the enemyPaddle and ball objects.
+
+		In enemyPaddle.move()...
+			We calculate the difference in the y coordinate between the center of the enemyPaddle and the center of
+			the ball. Depending on that difference (ydiff), and depending on the difficulty selected, the enemyPaddle
+			moves some distance. The greater the difficulty, the faster the paddle moves. The greater the difference
+			between the y coordinate of the ball and the enemyPaddle, the faster it moves.
+
+		In ball.move()...
+			The ball moves based on its given direction vectors in the x and y components, dx and dy. But, dx and
+			dy can change if the ball is either hit by any paddle or if it hits the top/bottom of the canvas,
+			where then the ball would have to bounce off, effectively negating dx or dy, respectively. Therefore,
+			we check to see if it is about to go out of bounds in the y direction by seeing where its y-coordinate
+			is heading, which is tested in its member function isOutOfYBounds().
+
+			To make the game more enjoyable, when the ball is hit by a paddle (checked by the function ball.isHitByPaddle()), it changes its speed in the y
+			direction depending on where it landed on the paddle. We compare where it landed on the paddle to
+			the center of the paddle. We take that difference (of which the maximum is 25), divide by 3 and
+			take the ceiling of that number, which is then set to the new dy component. If the ball hits 
+			towards the center of the paddle, the ball won't move radically in the y-direction, but if it 
+			moves towards the edges of the paddle, you will see the ball move very quickly.
+
+		The only way the user interacts with the userPaddle is with the up and down keys, which moves the paddle
+		up or down 30 pixels, respectively.
+			
+		Scoring
+			Scoring is handled simply by testing whether ball is past the x component of either of the paddles.
+			If it is past the userPaddle, then the enemy has scored a point, and vice versa.
+
+			ball.didScore() checks if it scored, but doesn't tell you who scored.
+			The function changeScore() handles who scored and increments their score.
+
+
+
+All sounds featured in the game were either found on freesound.org or created using Garageband.
